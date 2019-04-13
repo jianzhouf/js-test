@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .rotate-half {
+            transform: rotate(180deg)
+        }
+
+        .banner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner-header {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 44px 110px;
+            display: flex;
+            color: #fff;
+            justify-content: space-between;
+        }
+
+        .banner-header a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .x-space {
+            margin-right: 20px;
+        }
+
+        .banner-footer {
+            background: #3b3d40;
+            padding: 60px 140px;
+            display: flex;
+        }
+
+        .x-input {
+            box-sizing: border-box;
+            width: 220px;
+            border: 1px solid transparent;
+            border-radius: 3px;
+            padding: 5px 17px;
+            background-color: #585a5c;
+            outline: 0;
+            height: 46px;
+            color: #fff;
+
+        }
+
+        .x-input::placeholder {
+            color: #fff;
+
+        }
+
+        .x-picker {
+            position: relative;
+        }
+
+        .x-picker>select {
+            padding-right: 1.8rem;
+            color: #fff;
+            border-radius: 3px;
+            padding: 5px 17px;
+            height: 46px;
+            background-color: #585a5c;
+            border: 1px solid transparent;
+            outline: none;
+            /*去掉默认的下拉三角*/
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .x-picker>.x-icon {
+            position: absolute;
+            top: 16px;
+            right: 10px;
+            width: 20px;
+            height: 46px;
+            background: url(./select-icon.png) no-repeat;
+        }
+
+        .x-button {
+            position: relative;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        .x-button button {
+            border: none;
+            outline: none;
+            display: inline-block;
+            height: 46px;
+            /* padding: 0 40px; */
+            background: #2e71f2;
+            color: #fff;
+            font-weight: bold;
+            position: relative;
+            z-index: 10;
+        }
+
+        .x-button-circle {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #2e71f2;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .x-button-circle-right {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #2e71f2;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .flex-auto {
+            flex: auto;
+        }
+
+        .mv-small {
+            margin: 0 30px;
+        }
+
+        .main {
+            box-sizing: border-box;
+            height: 664px;
+            padding-top: 100px;
+            background: #f9f9f9;
+        }
+
+        .x-center {
+            text-align: center;
+        }
+
+        .x-text-color-1 {
+            color: #656b6f;
+        }
+
+        .x-list {
+            padding: 0;
+            overflow: hidden;
+            list-style: none;
+            margin: 60px auto 0;
+            width: 900px;
+        }
+
+        .x-list li {
+            width: 163px;
+            float: left;
+            text-align: center;
+            margin-left: 50px;
+        }
+        .x-list li h1 {
+            font-size: 14px;
+        }
+        .x-list li h4 {
+            font-size: 12px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./slideInit.css">
+    </link>
+</head>
+
+<body>
+    <section class="banner">
+        <header class="banner-header">
+            <div class="banner-header-left">
+                <a href="javascript:;">RU</a> / <a href="javascript:;">EN</a>
+
+            </div>
+            <div class="banner-header-middle">
+                <a href="javascript:;" class="x-space">PROJECTS</a>
+                <a href="javascript:;" class="x-space">ABOUT US</a>
+                <a href="javascript:;" class="x-space">STORIES</a>
+                <a href="javascript:;">CONTACT</a>
+
+            </div>
+            <div class="banner-header-right"> <a href="javascript:;" class="x-space"><img src="./social.png" alt=""></a>
+            </div>
+        </header>
+        <div class="slide-container">
+            <div class="slide-wrapper">
+                <div class="slide-block" data-index="1"><img src="./preview.png" alt=""></div>
+                <div class="slide-block" data-index="2"><img src="./preview.png" alt=""></div>
+                <div class="slide-block" data-index="3"><img src="./preview.png" alt=""></div>
+                <div class="slide-block" data-index="4"><img src="./preview.png" alt=""></div>
+            </div>
+            <div class="slide-prev"><img class="rotate-half" src="./arrow.png" alt=""></div>
+            <div class="slide-next"><img src="./arrow.png" alt=""></div>
+        </div>
+        <footer class="banner-footer">
+            <div>
+                <input class="x-input" type="text" placeholder="E-mail">
+            </div>
+            <div class="flex-auto mv-small">
+                <div class="x-picker">
+                    <select style="width: 100%;" name="" id="" placeholder="investment">
+                        <option value="1">选项1</option>
+                    </select>
+                    <div class="x-icon"></div>
+                </div>
+
+            </div>
+            <div>
+                <div class="x-button">
+                    <span class="x-button-circle"></span>
+                    <button class="x-button">LET's start</button>
+                    <span class="x-button-circle-right"></span>
+                </div>
+            </div>
+        </footer>
+    </section>
+    <section class="main">
+        <div class="x-center">
+            <img src="./icon1.png" alt="">
+        </div>
+        <h1 class="x-center">Your Next Move</h1>
+        <h4 class="x-center x-text-color-1">Helping talented students unlock their full <br>
+            potential. Help us help them thrive.</h4>
+        <ul class="x-list">
+            <li>
+                <img src="./icon2.png" alt="">
+                <h1 class="x-center">Your Next Move</h1>
+                <h4 class="x-center x-text-color-1">Helping talented students unlock their full </h4>
+            </li>
+            <li>
+                <img src="./icon2.png" alt="">
+                <h1 class="x-center">Your Next Move</h1>
+                <h4 class="x-center x-text-color-1">Helping talented students unlock their </h4>
+            </li>
+            <li>
+                <img src="./icon2.png" alt="">
+                <h1 class="x-center">Your Next Move</h1>
+                <h4 class="x-center x-text-color-1">Helping talented students</h4>
+            </li>
+            <li>
+                <img src="./icon2.png" alt="">
+                <h1 class="x-center">Your Next Move</h1>
+                <h4 class="x-center x-text-color-1">Helping t.</h4>
+            </li>
+        </ul>
+    </section>
+    <script src="./slideInit.js"></script>
+    <script>
+        slideInit(".slide-container", {
+            autoplay: true,
+        })
+    </script>
+</body>
+
+</html>
