@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./html2canvas.js"></script>
+    <style>
+        #box {
+            width: 200px;background: url(./1.jpg)
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" >
+        <p>大方 i 山东警方 i 绝对是减肥 i sad</p>
+        <p>大方 i 山东警方 i 绝对是减肥 i sad</p>
+        <p style="color: red">大方 i 山东警方 i 绝对是减肥 i sad</p>
+        <p>大方 i 山东警方 i 绝对是减肥 i sad</p>
+        <p>大方 i 山东警方 i 绝对是减肥 i sad</p>
+    </div>
+    <script>
+        const box = document.querySelector("#box")
+        html2canvas(box, {
+            backgroundColor: "red",
+            removeContainer: true
+        }).then(canvas => {
+            document.body.append(canvas)
+        })
+    </script>
+</body>
+
+</html>

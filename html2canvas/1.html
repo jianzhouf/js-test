@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .content {
+            position: relative;
+        }
+
+        .tips {
+            position: absolute;
+            top: 20px;
+            left: 0;
+        }
+
+        #image {
+            min-width: 470px;
+        }
+
+        .btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 20px;
+        }
+
+        .dust {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            filter: blur(0.05em);
+        }
+
+        .quickFade {
+            animation: fadeout 1.0s linear forwards;
+        }
+
+        .fade {
+            animation: fadeout 2s linear forwards;
+        }
+
+        @keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .blur {
+            animation: fadeblur 2s ease-in forwards;
+        }
+
+        @keyframes fadeblur {
+            0% {
+                opacity: 1;
+                filter: blur(0.05em);
+            }
+
+            80% {
+                filter: blur(0.188em);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+    <script src="http://chancejs.com/chance.min.js"></script>
+    <script src="./html2canvas.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <div id="image">
+
+            <img src="./1.jpg" width="400" alt="">
+        </div>
+    </div>
+
+    <button class="btn">dsf</button>
+    <script>
+        console.log(chance.integer({ min: -20, max: 20 }))
+        console.log(chance.integer({ min: -20, max: 20 }))
+
+        const imageBox = document.querySelector("#image");
+        const image = document.querySelector("#image img");
+        const btn = document.querySelector(".btn");
+        let isPlay = false; //是否触发了动画
+
+        btn.onclick = function () {
+
+            !isPlay && startAnimation();
+        };
+
+        function startAnimation() {
+            image.classList.remove("quickFade");
+            snap(imageBox);
+        }
+        const snap = target => {
+            isPlay = true;
+            html2canvas(target, {
+                allowTaint: false,
+                useCORS: true,
+                backgroundColor: "transparent",
+                scale: 1
+            })
+                .then(canvas => {
+                    const canvasCount = 20;
+                    const ctx = canvas.getContext("2d");
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const pixelArr = imageData.data;
+                    const data = imageData.data.slice(0).fill(0);
+                    let imageDataArray = Array.from({ length: canvasCount }, e => data.slice(0));
+                    console.log(imageDataArray)
+                    for (let i = 0; i < pixelArr.length; i += 4) {
+                        const p = Math.floor(i / pixelArr.length * canvasCount);
+                        const a = imageDataArray[weightedRandomDistrib(p, canvasCount)];
+
+                        a[i] = pixelArr[i];
+                        a[i + 1] = pixelArr[i + 1];
+                        a[i + 2] = pixelArr[i + 2];
+                        a[i + 3] = pixelArr[i + 3];
+                    }
+
+                    for (let i = 0; i < canvasCount; i++) {
+                        const c = newCanvasFromImageData(
+                            imageDataArray[i],
+                            canvas.width,
+                            canvas.height
+                        );
+                        c.classList.add("dust");
+                        
+                        // setTimeout(() => {
+                        //     animateTransform(
+                        //         c,
+                        //         200,
+                        //         0,
+                        //        0,
+                        //         2000
+                        //     );
+                        //     c.classList.add("blur");
+                        //     setTimeout(() => {
+                        //         c.remove();
+                        //     }, 2050);
+                        // }, 70 * i);
+
+                        target.appendChild(c);
+                    }
+
+                    Array.from(target.querySelectorAll(":not(.dust)")).map(el => {
+                        console.log(el)
+                        el.classList.add("quickFade");
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        };
+
+        function weightedRandomDistrib(peak, count) {
+            const prob = [],
+                seq = [];
+            for (let i = 0; i < count; i++) {
+                prob.push(Math.pow(count - Math.abs(peak - i), 6));
+                seq.push(i);
+            }
+            return chance.weighted(seq, prob);
+        }
+
+        function animateTransform(elem, sx, sy, angle, duration) {
+            elem.animate(
+                [
+                    { transform: "rotate(0) translate(0, 0)" },
+                    {
+                        transform: "rotate(" + angle + "deg) translate(" + sx + "px," + sy + "px)"
+                    }
+                ],
+                {
+                    duration: duration,
+                    easing: "ease-in"
+                }
+            );
+        }
+
+        function newCanvasFromImageData(imageDataArray, w, h) {
+            const canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+            const tempCtx = canvas.getContext("2d");
+            tempCtx.putImageData(new ImageData(imageDataArray, w, h), 0, 0);
+
+            return canvas;
+        }
+
+
+
+    </script>
+</body>
+
+</html>
