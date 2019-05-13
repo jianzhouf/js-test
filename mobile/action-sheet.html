@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+ 
+</head>
+<style>
+  .mask {
+    position: fixed;
+    display: none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7)
+  }
+
+  .actionPanel {
+    position: fixed;
+    transform: translateY(100%);
+    transform-origin: bottom left;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    transition: transform ease-out .2s;
+  }
+</style>
+
+<body>
+  <div style="height: 2000px;background: #f7f7f7">
+    321312312
+    <div>
+
+      <button style="margin-top: 300px;" onclick="clickFunc()">按钮</button>
+    </div>
+  </div>
+
+  <div class="mask"></div>
+  <div class="actionPanel">
+    <ul>
+      <li> 1</li>
+      <li> 1</li>
+      <li> 1</li>
+      <li> 1</li>
+
+    </ul>
+  </div>
+</body>
+<script>
+  function clickFunc() {
+    document.body.style.overflow = "hidden"
+    document.querySelector(".mask").style.display = "block"
+    document.querySelector(".actionPanel").style.transform= "translateY(0)"
+  }
+  document.querySelector(".mask").addEventListener("click", () => {
+    document.body.style.overflow = ""
+    document.querySelector(".mask").style.display = "none"
+    document.querySelector(".actionPanel").style.transform= "translateY(100%)"
+  })
+</script>
+
+</html>
